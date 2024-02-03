@@ -5,7 +5,7 @@
 Assuming, this third party API has lots of data of all type of social platforms. 
 <br />
 
-With a single API Key, user can request 60 times in each 5 min. We have 2 APIs, one is for fetching content & other is for author. In each content, we have author id,  by which we can call author API. So if we go syncronously, it would take much time. Why? For a single page (page=1/2/3 ...) content API call, assume there are n contents, assume n contents are having n distincts authors. so just after inserting one single content, there will be n author API call. so the author API call will block other operations. 
+With a single API Key, user can request 60 times in each 5 min. We have 2 APIs, one is for fetching content & other is for author. In each content, we have author id,  by which we can call author API. So if we go syncronously, it would take much time. Why? For a single page (page=1/2/3 ...) content API call, assume there are n contents, assume n contents are having n distincts authors. so just after inserting one single content, there will be a single author API call, which means for a page there will be (n+1) API calles. so the author API call will block other operations. 
 
 <br />
 
