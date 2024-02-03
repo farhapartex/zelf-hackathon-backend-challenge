@@ -77,3 +77,8 @@ class SocialContentStatisticsAPIView(views.APIView):
             hash_tag_count = queryset.filter(main_text__icontains=f"#{hash_tag}").count() if hash_tag else 0
             resp_data["hash_tag_count"] = hash_tag_count if hash_tag_count else 0,
         return response.Response(resp_data)
+
+
+class InstagramListAPIView(generics.ListAPIView):
+    queryset = models.Instagram.objects.all()
+    serializer_class = serializers.InstagramSerializer

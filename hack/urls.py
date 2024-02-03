@@ -1,8 +1,8 @@
-from django.urls import path
-from hack.views import SocialContentListAPIView, SocialContentStatisticsAPIView
+from django.urls import path, re_path
+from hack.views import SocialContentListAPIView, SocialContentStatisticsAPIView, InstagramListAPIView
 
 urlpatterns = [
     path('contents/', SocialContentListAPIView.as_view()),
     path('statistics/', SocialContentStatisticsAPIView.as_view()),
-    # path("api/v1/", include("hack.urls")),
+    re_path('^instagram-contents', InstagramListAPIView.as_view()),
 ]
