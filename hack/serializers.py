@@ -5,7 +5,7 @@ from hack.models import Author, SocialContent
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
-        fields = ("id", "unique_id", "username")
+        fields = ("id", "unique_id", "username", "platform")
 
 
 class SocialContentSerializer(serializers.ModelSerializer):

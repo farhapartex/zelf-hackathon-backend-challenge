@@ -24,3 +24,14 @@ class Author(models.Model):
 
     def __str__(self):
         return self.username
+    
+    
+class Instagram(models.Model):
+    username = models.CharField(max_length=255, blank=True, null=True)
+    uploaded_at = models.DateTimeField(blank=True, null=True)
+    user_profile_url = models.TextField(blank=True, null=True)
+    image_link = models.TextField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.user_profile_url
+    

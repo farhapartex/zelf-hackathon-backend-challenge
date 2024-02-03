@@ -4,7 +4,7 @@ import logging
 from django.conf import settings
 from django.db import transaction
 from celery import shared_task
-from hack.models import SocialContent, Author
+from hack.models import SocialContent, Author, Instagram
 from hack.service import fetch_contenet, get_or_create_author, save_content_data
 
 logger = logging.getLogger(__name__)
@@ -77,4 +77,27 @@ def fetch_author_details():
             except Exception as e:
                 logger.critical("Fetch author exception: ", str(e))
             
+
+
+@shared_task
+def fetch_instagram_details():
+    url = "https://0e69-202-84-41-238.ngrok-free.app/get_all_scraped_data"
+    try:
+        response = requests.get(url=url)
         
+        # get json data
+        if response.status_code == 200:
+            res_data = response.json()
+            if len(res_data["data"]) == 0:
+                return
+            
+            for data in res_data["data"]:
+                Instagram.objects.create(
+                    username=data["username"],
+                    uploaded_at=data["upload_timestamp"],
+                    user_profile_url=data["user_profile_url"],
+                    image_link=data["image_link"],
+                )
+                logger.info(f"Instagram data saved: {data['username']}")
+    except Exception as e:
+        logger.critical("Fetch author exception: ", str(e))  
